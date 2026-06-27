@@ -21,7 +21,7 @@ export const dynamic = 'force-static';
 
 export async function generateMetadata() {
   const title = 'Waterloo Hacker Fab';
-  const description = 'Open-access semiconductor fabrication lab at the University of Waterloo.';
+  const description = 'Open-source semiconductor fab at the University of Waterloo.';
   const url = 'https://waterloofab.com';
 
   return {
@@ -29,8 +29,8 @@ export async function generateMetadata() {
     description,
     metadataBase: new URL(url),
     icons: { icon: '/hf-logo.svg', apple: '/hf-logo.svg' },
-    openGraph: { title, description, url, type: 'website' },
-    twitter: { card: 'summary', title, description },
+    openGraph: { title, description, url, type: 'website', images: [{ url: '/hf-logo.png' }] },
+    twitter: { card: 'summary', title, description, images: ['/hf-logo.png'] },
   };
 }
 
