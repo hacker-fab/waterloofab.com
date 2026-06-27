@@ -13,8 +13,11 @@ const ModalStack: React.FC<ModalStackProps> = () => {
 
   const totalModals = modalStack.length;
 
+  if (totalModals === 0) return null;
+
   return (
     <div className={styles.root}>
+      <div className={styles.backdrop} onClick={() => close()} />
       {modalStack.map((modalState, index) => {
         const { key, component: ModalComponent, props } = modalState;
 

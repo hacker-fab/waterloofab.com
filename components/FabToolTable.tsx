@@ -6,6 +6,7 @@ import * as React from 'react';
 
 export interface FabTool {
   name: string;
+  shortName?: string;
   category: string;
   status: string;
   description: string;
@@ -39,6 +40,9 @@ const FabToolTable: React.FC<FabToolTableProps> = ({ tools, separatorAfter }) =>
             <td>CATEGORY</td>
             <td>STATUS</td>
           </tr>
+          <tr aria-hidden="true">
+            <td colSpan={3} style={{ padding: '0.4ch 0', background: 'transparent', border: 'none' }} />
+          </tr>
         </thead>
         <tbody>
           {tools.map((tool, i) => {
@@ -68,7 +72,12 @@ const FabToolTable: React.FC<FabToolTableProps> = ({ tools, separatorAfter }) =>
                 >
                   <td>
                     <span style={{ marginRight: '1ch', opacity: 0.5 }}>{isOpen ? '▾' : '▸'}</span>
-                    {tool.name}
+                    {tool.shortName ? (
+                      <>
+                        <span className={styles.nameShort}>{tool.shortName}</span>
+                        <span className={styles.nameFull}>{tool.name}</span>
+                      </>
+                    ) : tool.name}
                   </td>
                   <td>{tool.category}</td>
                   <td className={STATUS_OK.has(tool.status) ? styles.statusOk : undefined}>

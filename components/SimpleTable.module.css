@@ -53,3 +53,21 @@ scripts/cli/colors.json (#585858 / #00ff00 / #a8a8a8).
 .statusOff {
   color: var(--ansi-248-gray-66);
 }
+
+.nameShort {
+  display: none;
+}
+
+.nameFull {
+  display: inline;
+}
+
+@media (max-width: 600px) {
+  .nameShort {
+    display: inline;
+  }
+
+  .nameFull {
+    display: none;
+  }
+}

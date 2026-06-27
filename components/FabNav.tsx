@@ -6,6 +6,9 @@ import navStyles from '@components/FabNav.module.css';
 import * as React from 'react';
 
 import { useHotkeys } from '@modules/hotkeys';
+import { useModals } from '@components/page/ModalContext';
+
+import ModalMedia from '@components/modals/ModalMedia';
 
 interface NavItem {
   label: string;
@@ -16,25 +19,44 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  {
-    label: 'MAP',
-    hotkey: '⌃+M',
-    hotkeyKey: 'ctrl+m',
-    href: 'https://maps.app.goo.gl/UcKTWBqJWAMLfbE97',
-    external: true,
-  },
+  { label: 'DOCS', hotkey: '⌃+D', hotkeyKey: 'ctrl+d', href: 'https://docs.hackerfab.org', external: true },
   { label: 'CONTACT', hotkey: '⌃+K', hotkeyKey: 'ctrl+k', href: '#contact' },
-  { label: 'MEDIA', hotkey: '⌃+I', hotkeyKey: 'ctrl+i', href: '#media' },
   { label: 'FAQ', hotkey: '⌃+Q', hotkeyKey: 'ctrl+q', href: '#faq' },
+  { label: 'MAP', hotkey: '⌃+M', hotkeyKey: 'ctrl+m', href: 'https://maps.app.goo.gl/UcKTWBqJWAMLfbE97', external: true },
 ];
 
+const pulseSection = (id: string) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  el.classList.remove('section-pulse');
+  void el.offsetWidth;
+  el.classList.add('section-pulse');
+  el.addEventListener('animationend', () => el.classList.remove('section-pulse'), { once: true });
+};
+
 const FabNav: React.FC = () => {
+  const { open, close, modalStack } = useModals();
+  const mediaKeyRef = React.useRef<string | null>(null);
   const refs = React.useRef<(HTMLAnchorElement | null)[]>([]);
 
   NAV_ITEMS.forEach((item, i) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useHotkeys(item.hotkeyKey, () => refs.current[i]?.click());
   });
+
+  const isMediaOpen = mediaKeyRef.current !== null && modalStack.some((m) => m.key === mediaKeyRef.current);
+
+  const toggleMedia = () => {
+    if (isMediaOpen) {
+      close(mediaKeyRef.current ?? undefined);
+      mediaKeyRef.current = null;
+    } else {
+      mediaKeyRef.current = open(ModalMedia, {});
+    }
+  };
+
+  useHotkeys('ctrl+i', toggleMedia);
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -47,11 +69,20 @@ const FabNav: React.FC = () => {
           rel={item.external ? 'noopener noreferrer' : undefined}
           className={buttonStyles.root}
           style={{ textDecoration: 'none' }}
+          onClick={!item.external ? (e) => { e.preventDefault(); pulseSection(item.href.slice(1)); } : undefined}
         >
           <span className={`${buttonStyles.hotkey} ${navStyles.hotkey}`}>{item.hotkey}</span>
           <span className={buttonStyles.content}>{item.label}</span>
         </a>
       ))}
+      <button
+        className={buttonStyles.root}
+        onClick={toggleMedia}
+        style={{ background: 'none', border: 'none', cursor: 'pointer', font: 'inherit', padding: 0 }}
+      >
+        <span className={`${buttonStyles.hotkey} ${navStyles.hotkey}`}>⌃+I</span>
+        <span className={buttonStyles.content}>MEDIA</span>
+      </button>
     </div>
   );
 };

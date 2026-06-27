@@ -478,3 +478,12 @@ body.theme-dark.tint-pink {
     --font-size: 14px;
   }
 }
+
+@keyframes sectionPulse {
+  0% { background-color: var(--theme-focused-foreground-subdued); }
+  100% { background-color: transparent; }
+}
+
+.section-pulse {
+  animation: sectionPulse 1200ms ease;
+}

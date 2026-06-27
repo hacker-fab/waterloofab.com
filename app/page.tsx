@@ -2,6 +2,7 @@ import '@root/global-fonts.css';
 import '@root/global.css';
 
 import ActionListItem from '@components/ActionListItem';
+import BlockLoader from '@components/BlockLoader';
 import Card from '@components/Card';
 import DebugGrid from '@components/DebugGrid';
 import DefaultLayout from '@components/page/DefaultLayout';
@@ -35,7 +36,8 @@ export async function generateMetadata() {
 
 const TOOLS: FabTool[] = [
   {
-    name: 'DLP UV Lithography Stepper',
+    name: 'Lithography Stepper',
+    shortName: 'Litho Stepper',
     category: 'Patterning',
     status: 'ACTIVE',
     description:
@@ -51,40 +53,41 @@ const TOOLS: FabTool[] = [
     docsUrl: 'https://docs.hackerfab.org/home/fab-toolkit/annealing/tube-furnace',
   },
   {
-    name: 'Sputter Coater',
+    name: 'DC Sputter',
     category: 'Deposition',
     status: 'ACTIVE',
     description:
-      'An RF sputtering system operating at 14 MHz that uses plasma to sputter material from a target onto a substrate. Capable of depositing both aluminum metal contacts and aluminum oxide dielectric layers in a single chamber, enabling gate stack fabrication. Reactive sputtering with oxygen allows direct deposition of oxide films.',
-    docsUrl: 'https://docs.hackerfab.org/home/fab-toolkit/deposition/diy-rf-sputtering-chamber',
+      'A DC sputtering system that uses a plasma discharge to sputter material from a target onto a substrate. Used to deposit aluminum metal contacts and thin film layers for device fabrication.',
+    docsUrl: 'https://docs.hackerfab.org/home/fab-toolkit/deposition/diy-dc-sputtering-wip-uwaterloo',
   },
   {
     name: 'Spin Coater',
     category: 'Deposition',
     status: 'ACTIVE',
     description:
-      'A vacuum-chuck spin coater used to uniformly apply photoresist and other liquid films onto substrates. Spin speed and time control film thickness; the vacuum chuck holds wafers and dies securely during the spin cycle. Essential first step before every lithography exposure.',
-    docsUrl: 'https://docs.hackerfab.org/home/fab-toolkit/deposition/spin-coater-v2-build-work-in-progress',
+      'A spin coater used to uniformly apply photoresist and other liquid films onto substrates. Spin speed and time control film thickness; the wafer is taped to the chuck to hold it in place during the spin cycle. Essential first step before every lithography exposure.',
+    docsUrl: 'https://docs.hackerfab.org/home/standard-operating-procedures/patterning-sop-stepper-v2/spin-coating-sop-rev-2-uwaterloo#spin-coating',
   },
   {
-    name: 'Tube Furnace Mfg Method',
+    name: 'Tube Furnace Mfg',
     category: 'Annealing',
-    status: 'IN PROGRESS',
+    status: 'R & D',
     description:
-      'Development of an improved manufacturing method for the tube furnace — focused on tighter temperature uniformity, better sealing for process gas control, and a lower-cost build path to enable other Hacker Fab nodes to replicate the tool.',
+      'Development of an improved manufacturing method for the tube furnace — focused on tighter temperature uniformity.',
     docsUrl: 'https://docs.hackerfab.org/home/fab-toolkit/annealing/tube-furnace',
   },
   {
     name: 'Quartz Crystal Microbalance',
+    shortName: 'QCM',
     category: 'Metrology',
-    status: 'IN PROGRESS',
+    status: 'R & D',
     description:
       'A quartz crystal microbalance (QCM) monitors thin film deposition in real time by measuring the resonant frequency shift of a piezoelectric quartz crystal as mass accumulates on its surface. Used in-situ during sputtering and evaporation runs to track deposition rate and total film thickness, enabling precise thickness control without breaking vacuum.',
   },
   {
     name: 'Sputter Upgrades',
     category: 'Deposition',
-    status: 'IN PROGRESS',
+    status: 'R & D',
     description:
       'Upgrade to the existing sputter chamber with improved target cooling (to handle higher power and longer runs) and a better vacuum system for lower base pressure, reducing film contamination and enabling higher-quality oxide and metal depositions.',
     docsUrl: 'https://docs.hackerfab.org/home/fab-toolkit/deposition/diy-dc-sputtering-wip-uwaterloo',
@@ -92,39 +95,56 @@ const TOOLS: FabTool[] = [
   {
    name: 'RF PSU ',
     category: 'Deposition',
-    status: 'IN PROGRESS',
+    status: 'R & D',
     description:
       'Design and build of a custom RF power supply for the sputtering system. A purpose-built PSU enables finer control over RF power and matching network tuning, improving plasma stability and deposition rate consistency compared to repurposed commercial units.',
   },
   {
     name: 'Litho Automation',
+    shortName: 'Litho Auto',
     category: 'Patterning',
-    status: 'IN PROGRESS',
+    status: 'R & D',
     description:
       'Software and hardware additions to the lithography stepper for automated alignment — using computer vision to detect alignment marks on the substrate and servo the stage to correct for translation and rotation before exposure. Targets sub-micron overlay accuracy across multiple lithography layers.',
     docsUrl: 'https://docs.hackerfab.org/home/fab-toolkit/patterning/lithography-stepper-v2.1',
   },
   {
     name: 'Atomic Force Microscope',
+    shortName: 'AFM',
     category: 'Metrology',
-    status: 'IN PROGRESS',
+    status: 'R & D',
     description:
       'Build-out of a DIY atomic force microscope for surface metrology — measuring thin film thickness, surface roughness, and step heights at nanometer resolution. Critical for process characterization and verifying film quality without access to commercial metrology tools.',
   },
   {
     name: 'Spectrometer',
     category: 'Metrology',
-    status: 'IN PROGRESS',
+    status: 'R & D',
     description:
       'An optical spectrometer for in-situ and post-process thin film characterization. Used for reflectometry to measure oxide thickness and for identifying spectral signatures of deposited films. Enables non-destructive process feedback without destructive cross-section analysis.',
     docsUrl: 'https://docs.hackerfab.org/home/fab-toolkit/metrology-characterization/spectrometer',
   },
   {
     name: 'Process Development',
+    shortName: 'Process Dev',
     category: 'Process',
-    status: 'IN PROGRESS',
+    status: 'R & D',
     description:
       'Development of wet chemical etch processes — HF-based oxide etches, metal etchants, and developer chemistry optimization — along with systematic process tuning for resist adhesion, exposure dose, bake temperatures, and etch selectivity to improve overall device yield.',
+  },
+  {
+    name: 'Vacuum Chuck',
+    category: 'Deposition',
+    status: 'R & D',
+    description:
+      'Development of a DIY vacuum chuck to replace the current taped-chuck setup on the spin coater. A vacuum chuck holds wafers and dies securely by suction, improving centering and repeatability across spin coating runs.',
+  },
+  {
+    name: 'Probe Station',
+    category: 'Metrology',
+    status: 'R & D',
+    description:
+      'A probe station is a nanoscale multimeter for testing chips after fabrication — probe needles physically contact pads on the chip to measure electrical characteristics like I-V curves, verifying whether the device works. As part of the Hacker Fab goal of open-sourcing every nanofabrication tool, we are developing a DIY probe station.',
   },
 ];
 
@@ -138,12 +158,8 @@ const FAQ = [
     a: "We're looking for a small number of passionate students across various disciplines including mechanical engineering, electrical engineering, physics, chemistry, nano. Since our team is small, you'll have significant control over what you work on. The work is divided into teams, which determine what specific project (i.e. tool for fabrication) you will work on. No specific qualifications are required - we value dedication and smart thinking over credentials. Because of the nature of our team, you will also end up getting hands on engineering experience, doing everything from designing the projects to actually building them out."
   },
   {
-    q: 'Do I need training before using the tools?',
-    a: 'Yes. All users must complete a safety orientation and tool-specific training before operating equipment independently.',
-  },
-  {
     q: 'What projects will I work on here?',
-    a: "You'll work on building chips from scratch using our open-source fabrication tools. This includes developing lithography stepper for projecting patterns of design onto silicon, tube furnace for heating up gases to +1000 degrees in order to dope silicon, reactive ion etcher. These are just a few of the projects we have active. Over time, more will be added as we move towards the goal of having a complete fabrication process with enough precision and tools to make everything from transistors to more complicated ICs.",
+    a: "You'll work on building the tools to make chips. This includes developing lithography stepper for projecting patterns of design onto silicon, tube furnace for heating up gases to +1000 degrees in order to dope silicon, reactive ion etcher and designing tools & processes to characteriz our chips. These are just a few of the projects we have active. Over time, more will be added as we move towards the goal of having a complete fabrication process with enough precision and tools to make everything from transistors to more complicated ICs.",
   },
   {
     q: 'How do I get involved or contribute?',
@@ -164,11 +180,10 @@ export default async function Page() {
         right={<FabNav />}
       />
 
-      <Grid>
-        <Row>The HACKER FAB at Waterloo,</Row>
+      <Grid style={{ paddingBottom: '0.5ch' }}>
         <Row>
           <Text>
-            is an open-access semiconductor fabrication facility at the University of Waterloo's Sedra Design Center. We design, build and operate patterning, deposition, and characterization equipment enabling students to fabricate real devices from scratch and gain exposure to open-ended engineering problems.
+          The HACKER FAB at Waterloo, is an open-source semiconductor fab at the University of Waterloo's Sedra Design Center. We design, build and operate patterning, deposition, and characterization equipment enabling students to fabricate real devices from scratch and gain exposure to open-ended engineering problems.
           </Text>
         </Row>
         <br/>
@@ -188,27 +203,17 @@ export default async function Page() {
       </Grid>
 
       <Grid>
-        <Row style={{ fontWeight: 600 }}>EQUIPMENT</Row>
-        <br/>
+        <Row style={{ fontWeight: 600, marginBottom: '3px' }}>EQUIPMENT</Row>
         <Window>
-          <Card title="EQUIPMENT STATUS" mode="left">
+          <Card title={<span style={{ display: 'flex', alignItems: 'center', gap: '1ch' }}>EQUIPMENT STATUS <BlockLoader mode={1} /></span>} mode="left">
             <FabToolTable tools={TOOLS} separatorAfter={4} />
           </Card>
         </Window>
       </Grid>
 
 
-      <Grid id="media">
-        <Row style={{ fontWeight: 600 }}>Media</Row>
-        <br/>
-        <Row>
-          <Text style={{ opacity: 0.5 }}>Coming soon.</Text>
-        </Row>
-      </Grid>
-
       <Grid id="faq">
-        <Row style={{ fontWeight: 600 }}>FAQ</Row>
-        <br />
+        <Row style={{ fontWeight: 600, marginBottom: '3px' }}>FAQ</Row>
         {FAQ.map(({ q, a }) => (
           <Accordion key={q} title={q}>
             <div style={{ background: 'var(--theme-border)', padding: '1ch 1ch 1ch 1ch', margin: '0 0 0 -1ch' }}>
@@ -219,9 +224,12 @@ export default async function Page() {
       </Grid>
 
       <Grid id="contact">
-        <Row>CONTACT</Row>
+        <Row style={{ fontWeight: 600, marginBottom: '3px' }}>CONTACT</Row>
         <ActionListItem icon="⭢" href="mailto:waterloohackerfab@gmail.com">
           waterloohackerfab@gmail.com
+        </ActionListItem>
+        <ActionListItem icon="⭢" href="https://discord.gg/hacker-fab-1143959339179200562" target="_blank">
+          Discord
         </ActionListItem>
         <ActionListItem
           icon="⊹"

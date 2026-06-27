@@ -135,25 +135,6 @@ const DefaultActionBar: React.FC<DefaultActionBarProps> = ({ items = [] }) => {
 
   useGlobalNavigationHotkeys();
 
-  React.useEffect(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    const applyTheme = (e: MediaQueryList | MediaQueryListEvent) => {
-      if (e.matches) {
-        Utilities.onHandleAppearanceChange('theme-dark');
-      } else {
-        Utilities.onHandleAppearanceChange('');
-      }
-    };
-
-    applyTheme(prefersDark);
-
-    prefersDark.addEventListener('change', applyTheme);
-
-    return () => {
-      prefersDark.removeEventListener('change', applyTheme);
-    };
-  }, []);
 
   return (
     <div className={styles.root}>
@@ -370,11 +351,6 @@ const DefaultActionBar: React.FC<DefaultActionBarProps> = ({ items = [] }) => {
                 icon: '⊹',
                 children: 'Light',
                 onClick: () => Utilities.onHandleAppearanceChange(''),
-              },
-              {
-                icon: '⊹',
-                children: 'Dark',
-                onClick: () => Utilities.onHandleAppearanceChange('theme-dark'),
               },
             ],
           },

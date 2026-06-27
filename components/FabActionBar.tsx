@@ -49,6 +49,8 @@ const useGlobalNavigationHotkeys = () => {
   useHotkeys(' ', onHandleSubmit);
 };
 
+const TINTS = ['tint-blue', 'tint-green', 'tint-orange', 'tint-purple', 'tint-red', 'tint-yellow', 'tint-pink'];
+
 const FabActionBar: React.FC = () => {
   const { close } = useModals();
 
@@ -58,13 +60,8 @@ const FabActionBar: React.FC = () => {
   useGlobalNavigationHotkeys();
 
   React.useEffect(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    const applyTheme = (e: MediaQueryList | MediaQueryListEvent) => {
-      Utilities.onHandleAppearanceChange(e.matches ? 'theme-dark' : '');
-    };
-    applyTheme(prefersDark);
-    prefersDark.addEventListener('change', applyTheme);
-    return () => prefersDark.removeEventListener('change', applyTheme);
+    const tint = TINTS[Math.floor(Math.random() * TINTS.length)];
+    Utilities.onHandleAppearanceModeChange(tint);
   }, []);
 
   return null;

@@ -11,6 +11,12 @@
   z-index: var(--z-index-page-modals);
 }
 
+.backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+}
+
 .item {
   pointer-events: auto;
   position: absolute;
