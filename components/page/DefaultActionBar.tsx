@@ -391,11 +391,6 @@ const DefaultActionBar: React.FC<DefaultActionBarProps> = ({ items = [] }) => {
               },
               {
                 icon: '⊹',
-                children: 'Yellow',
-                onClick: () => Utilities.onHandleAppearanceModeChange('tint-yellow'),
-              },
-              {
-                icon: '⊹',
                 children: 'Pink',
                 onClick: () => Utilities.onHandleAppearanceModeChange('tint-pink'),
               },

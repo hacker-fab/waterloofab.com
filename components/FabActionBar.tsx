@@ -49,19 +49,18 @@ const useGlobalNavigationHotkeys = () => {
   useHotkeys(' ', onHandleSubmit);
 };
 
-const TINTS = ['tint-blue', 'tint-green', 'tint-orange', 'tint-purple', 'tint-red', 'tint-yellow', 'tint-pink'];
+const TINTS = [null, null, 'tint-blue', 'tint-green', 'tint-orange', 'tint-purple', 'tint-red', 'tint-pink'];
 
 const FabActionBar: React.FC = () => {
   const { close } = useModals();
 
-  useHotkeys('ctrl+g', () => toggleDebugGrid());
   useHotkeys('Escape', () => close());
 
   useGlobalNavigationHotkeys();
 
   React.useEffect(() => {
     const tint = TINTS[Math.floor(Math.random() * TINTS.length)];
-    Utilities.onHandleAppearanceModeChange(tint);
+    Utilities.onHandleAppearanceModeChange(tint ?? undefined);
   }, []);
 
   return null;

@@ -46,7 +46,7 @@ scripts/cli/colors.json (#585858 / #00ff00 / #a8a8a8).
 }
 
 .statusOk {
-  color: var(--ansi-10-lime);
+  color: var(--tint, var(--ansi-10-lime));
   font-weight: 700;
 }
 

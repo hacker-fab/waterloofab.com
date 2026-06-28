@@ -33,11 +33,12 @@
 }
 
 .icon {
-  align-items: center;
+  align-items: flex-start;
+  align-self: stretch;
   background: var(--theme-button-foreground);
   display: inline-flex;
   flex-shrink: 0;
-  height: calc(var(--font-size) * var(--theme-line-height-base));
+  min-height: calc(var(--font-size) * var(--theme-line-height-base));
   justify-content: center;
   width: 3ch;
   user-select: none;

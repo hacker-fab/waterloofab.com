@@ -123,16 +123,16 @@ a {
 }
 
 ul {
-  list-style-position: inside;
+  list-style-position: outside;
   list-style-type: '▪';
-  text-indent: -1ch;
+  padding-left: 2ch;
 }
 
 ol {
   list-style-type: '';
-  list-style-position: inside;
+  list-style-position: outside;
   counter-reset: cupcake;
-  text-indent: -1ch;
+  padding-left: 2ch;
 }
 
 ul ul,
@@ -371,9 +371,6 @@ body.tint-red {
   --tint: #ff0000;
 }
 
-body.tint-yellow {
-  --tint: var(--ansi-true-brand);
-}
 
 body.tint-purple {
   --tint: #8000ff;
@@ -390,7 +387,6 @@ body.tint-pink {
 body.theme-light.tint-green,
 body.theme-light.tint-blue,
 body.theme-light.tint-red,
-body.theme-light.tint-yellow,
 body.theme-light.tint-purple,
 body.theme-light.tint-orange,
 body.theme-light.tint-pink {
@@ -432,7 +428,6 @@ body.theme-light.tint-pink {
 body.theme-dark.tint-green,
 body.theme-dark.tint-blue,
 body.theme-dark.tint-red,
-body.theme-dark.tint-yellow,
 body.theme-dark.tint-purple,
 body.theme-dark.tint-orange,
 body.theme-dark.tint-pink {

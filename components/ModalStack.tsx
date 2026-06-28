@@ -9,7 +9,7 @@ import { useModals } from '@components/page/ModalContext';
 interface ModalStackProps {}
 
 const ModalStack: React.FC<ModalStackProps> = () => {
-  const { modalStack } = useModals();
+  const { modalStack, close } = useModals();
 
   const totalModals = modalStack.length;
 
