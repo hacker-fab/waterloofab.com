@@ -43,12 +43,14 @@
   gap: 0.5ch;
 }
 
-.imageCard img {
+.imageCard img,
+.imageCard video {
   width: 100%;
   height: 32ch;
   object-fit: cover;
   display: block;
   border: 1px solid var(--theme-border-subdued);
+  background: #000;
 }
 
 .imageLabel {

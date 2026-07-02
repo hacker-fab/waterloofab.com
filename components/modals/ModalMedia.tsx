@@ -14,6 +14,8 @@ const MEDIA_ITEMS = [
   { src: '/tube-furnace-chart.jpg', label: 'Tube Furnace — Process Chart' },
   { src: '/litho.jpg', label: 'Photolithography' },
   { src: '/vacuum-chuck-cad.webp', label: 'Vacuum Chuck — CAD' },
+  { src: '/sputter-glass.webp', label: 'DC Sputter — Coated Glass' },
+  { src: '/sputter-vid.mov', label: 'DC Sputter — In Action', video: true },
 ];
 
 function ModalMedia() {
@@ -25,7 +27,11 @@ function ModalMedia() {
         <div className={styles.gallery}>
           {MEDIA_ITEMS.map((item) => (
             <div key={item.src} className={styles.imageCard}>
-              <img src={item.src} alt={item.label} />
+              {item.video ? (
+                <video src={item.src} controls playsInline />
+              ) : (
+                <img src={item.src} alt={item.label} />
+              )}
               <span className={styles.imageLabel}>{item.label}</span>
             </div>
           ))}
