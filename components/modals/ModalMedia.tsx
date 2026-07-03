@@ -10,12 +10,13 @@ import Button from '@components/Button';
 import Card from '@components/Card';
 
 const MEDIA_ITEMS = [
+  { src: '/sputter-glass.webp', label: 'DC Sputter — Coated Glass' },
+  { src: '/sputter-vid.mov', label: 'DC Sputter — In Action', video: true },
   { src: '/tube-furnace-jpg.jpg', label: 'Tube Furnace' },
   { src: '/tube-furnace-chart.jpg', label: 'Tube Furnace — Process Chart' },
   { src: '/litho.jpg', label: 'Photolithography' },
+  { src: '/spincoater.jpeg', label: 'Spin Coater' },
   { src: '/vacuum-chuck-cad.webp', label: 'Vacuum Chuck — CAD' },
-  { src: '/sputter-glass.webp', label: 'DC Sputter — Coated Glass' },
-  { src: '/sputter-vid.mov', label: 'DC Sputter — In Action', video: true },
 ];
 
 function ModalMedia() {

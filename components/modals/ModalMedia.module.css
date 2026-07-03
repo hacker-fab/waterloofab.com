@@ -16,8 +16,8 @@
   display: block;
   font-weight: 400;
   margin: 0 auto;
-  max-width: min(140ch, 90vw);
-  width: 90vw;
+  max-width: min(180ch, 96vw);
+  width: 96vw;
   padding: calc(var(--font-size) * var(--theme-line-height-base)) 2ch calc(var(--font-size) * var(--theme-line-height-base)) 2ch;
   user-select: none;
 }
@@ -27,7 +27,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 2ch;
   overflow-y: auto;
-  max-height: 60vh;
+  max-height: 80vh;
   padding-bottom: 1ch;
 }
 
@@ -46,8 +46,9 @@
 .imageCard img,
 .imageCard video {
   width: 100%;
-  height: 32ch;
-  object-fit: cover;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
   display: block;
   border: 1px solid var(--theme-border-subdued);
   background: #000;
