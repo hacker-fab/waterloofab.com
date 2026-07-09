@@ -223,6 +223,28 @@ export default async function Page() {
         ))}
       </Grid>
 
+      <Grid id="sponsor">
+        <Row style={{ fontWeight: 600, marginBottom: '3px' }}>SPONSORSHIP</Row>
+        <Row>
+          <Text>
+            Hacker Fab sees sponsorship as a way to build stronger relationships between our sponsor companies and Waterloo’s student ecosystem.
+            Students here complete 5-6 co-ops throughout their degree, creating a constant flow of technical talent between the university and companies worldwide.
+            We help sponsors tap into this through events, student engagement, lab demos, and introductions to strong technical talent. 
+            <br />
+            <br />
+            Sponsored tools can be named after your company, and sponsors are recognized on our website, in LinkedIn posts, and by HackerFab members.
+          </Text>
+        </Row>
+        <br />
+        <ActionListItem
+          icon="⭢"
+          href="https://docs.google.com/document/d/1br1uqPcKH3_II-7GZcfvDpuFsgBN5H3fRLDFnIcEbh0/edit?usp=sharing"
+          target="_blank"
+        >
+          Sponsorship Deck
+        </ActionListItem>
+      </Grid>
+
       <Grid id="contact">
         <Row style={{ fontWeight: 600, marginBottom: '3px' }}>CONTACT</Row>
         <ActionListItem icon="⭢" href="mailto:waterloohackerfab@gmail.com">
@@ -239,6 +261,7 @@ export default async function Page() {
           E5-2001, University of Waterloo, Waterloo ON
         </ActionListItem>
       </Grid>
+
     </DefaultLayout>
   );
 }

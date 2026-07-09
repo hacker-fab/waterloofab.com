@@ -19,10 +19,8 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'DOCS', hotkey: '⌃+D', hotkeyKey: 'ctrl+d', href: 'https://docs.hackerfab.org', external: true },
   { label: 'CONTACT', hotkey: '⌃+K', hotkeyKey: 'ctrl+k', href: '#contact' },
-  { label: 'FAQ', hotkey: '⌃+Q', hotkeyKey: 'ctrl+q', href: '#faq' },
-  { label: 'MAP', hotkey: '⌃+M', hotkeyKey: 'ctrl+m', href: 'https://maps.app.goo.gl/UcKTWBqJWAMLfbE97', external: true },
+  { label: 'SPONSOR', hotkey: '⌃+S', hotkeyKey: 'ctrl+s', href: 'https://docs.google.com/document/d/1br1uqPcKH3_II-7GZcfvDpuFsgBN5H3fRLDFnIcEbh0/edit?usp=sharing', external: true },
 ];
 
 const pulseSection = (id: string) => {
