@@ -35,6 +35,11 @@ const DebugGrid: React.FC = () => {
       debugGrid.style.display = isVisible ? 'block' : 'none';
     };
 
+    const setDebugGridVisibility = (event: Event) => {
+      isVisible = Boolean((event as CustomEvent<boolean>).detail);
+      debugGrid.style.display = isVisible ? 'block' : 'none';
+    };
+
     const handleDebugGridToggle = () => toggleDebugGrid();
 
     const observer = new ResizeObserver(() => {
@@ -43,12 +48,14 @@ const DebugGrid: React.FC = () => {
     observer.observe(document.documentElement);
 
     window.addEventListener('debugGridToggle', handleDebugGridToggle);
+    window.addEventListener('debugGridSet', setDebugGridVisibility);
     window.addEventListener('resize', setGridHeight);
 
     return () => {
       document.body.removeChild(debugGrid);
       window.removeEventListener('resize', setGridHeight);
       window.removeEventListener('debugGridToggle', handleDebugGridToggle);
+      window.removeEventListener('debugGridSet', setDebugGridVisibility);
       observer.disconnect();
     };
   }, []);
@@ -58,6 +65,10 @@ const DebugGrid: React.FC = () => {
 
 export const toggleDebugGrid = (): void => {
   window.dispatchEvent(new CustomEvent('debugGridToggle'));
+};
+
+export const setDebugGridVisible = (isVisible: boolean): void => {
+  window.dispatchEvent(new CustomEvent('debugGridSet', { detail: isVisible }));
 };
 
 export default DebugGrid;

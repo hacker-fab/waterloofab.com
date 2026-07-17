@@ -12,7 +12,9 @@
 .root {
   animation: fadeIn 0.3s ease-out;
   background: var(--theme-background-modal);
-  box-shadow: 0 0 0 1ch var(--theme-border-subdued);
+  box-shadow:
+    inset 0 0 0 2px var(--theme-text),
+    0 0 0 1ch var(--theme-border-subdued);
   display: block;
   font-weight: 400;
   margin: 0 auto;
@@ -23,42 +25,90 @@
 }
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2ch;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   overflow-y: auto;
   max-height: 80vh;
   padding-bottom: 1ch;
 }
 
+.galleryRow {
+  display: grid;
+  gap: 5px;
+}
+
+.threeColumns {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.twoColumns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 @media (max-width: 700px) {
-  .gallery {
+  .galleryRow {
     grid-template-columns: 1fr;
   }
 }
 
 .imageCard {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.5ch;
+  overflow: hidden;
 }
 
-.imageCard img,
-.imageCard video {
+.imageFrame {
   width: 100%;
-  height: auto;
-  max-height: 60vh;
-  object-fit: contain;
   display: block;
-  border: 1px solid var(--theme-border-subdued);
-  background: #000;
+}
+
+.imageFrame {
+  height: clamp(12rem, 28vw, 22rem);
+  max-height: 40vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .imageLabel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 2.5rem 1ch 0.75ch;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.85));
+  color: #fff;
   font-size: 0.85em;
-  opacity: 0.6;
+  opacity: 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  pointer-events: none;
+  transform: translateY(100%);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.imageCard:hover .imageLabel,
+.imageCard:focus-within .imageLabel {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .footer {

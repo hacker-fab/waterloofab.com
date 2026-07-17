@@ -125,6 +125,13 @@ const TOOLS: FabTool[] = [
     docsUrl: 'https://docs.hackerfab.org/home/fab-toolkit/metrology-characterization/spectrometer',
   },
   {
+    name: 'Reflectometer',
+    category: 'Metrology',
+    status: 'R & D',
+    description:
+      'A non-destructive optical measurement tool for determining thin-film thickness from reflected light, enabling faster process characterization and feedback.',
+  },
+  {
     name: 'Process Development',
     shortName: 'Process Dev',
     category: 'Process',
