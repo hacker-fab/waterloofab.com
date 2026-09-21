@@ -7,6 +7,7 @@ import Card from '@components/Card';
 import DebugGrid from '@components/DebugGrid';
 import DefaultLayout from '@components/page/DefaultLayout';
 import FabActionBar from '@components/FabActionBar';
+import FabFluidGrid from '@components/page/FabFluidGrid';
 import FabToolTable, { type FabTool } from '@components/FabToolTable';
 import Grid from '@components/Grid';
 import ModalStack from '@components/ModalStack';
@@ -268,6 +269,8 @@ export default async function Page() {
           E5-2001, University of Waterloo, Waterloo ON
         </ActionListItem>
       </Grid>
+
+      <FabFluidGrid />
 
     </DefaultLayout>
   );

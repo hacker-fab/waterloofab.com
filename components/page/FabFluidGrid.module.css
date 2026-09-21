@@ -1,0 +1,44 @@
+.root {
+  background: var(--theme-background);
+  box-shadow: inset 1px 0 0 var(--theme-border);
+  bottom: 0;
+  left: 80ch;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+  touch-action: pan-y;
+  user-select: none;
+  z-index: 0;
+}
+
+.canvas {
+  display: block;
+  height: 100%;
+  image-rendering: pixelated;
+  width: 100%;
+}
+
+.measure {
+  height: calc(var(--font-size) * var(--theme-line-height-base));
+  left: -9999px;
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+  width: 1ch;
+}
+
+@media (max-width: 1100px) {
+  .root {
+    border-bottom: 1px solid var(--theme-border);
+    border-top: 1px solid var(--theme-border);
+    box-shadow: none;
+    height: calc(var(--font-size) * var(--theme-line-height-base) * 12);
+    left: auto;
+    margin: 0 2ch calc(var(--font-size) * var(--theme-line-height-base));
+    position: relative;
+    right: auto;
+    top: auto;
+    width: calc(100% - 4ch);
+  }
+}
